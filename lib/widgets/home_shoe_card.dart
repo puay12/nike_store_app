@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store_app/bloc/color/fav_color_cubit.dart';
 import 'package:nike_store_app/bloc/color/fav_color_state.dart';
-import 'package:nike_store_app/bloc/favorite_color_bloc.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

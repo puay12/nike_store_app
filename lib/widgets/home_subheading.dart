@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nike_store_app/constants/theme.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeSubHeading extends StatelessWidget {
   const HomeSubHeading({

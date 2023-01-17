@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:nike_store_app/bloc/navigation/nav_cubit.dart';
 import 'package:nike_store_app/bloc/navigation/navbar_items.dart';
 
 class NavigationState extends Equatable {
