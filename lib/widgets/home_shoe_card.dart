@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nike_store_app/bloc/color/fav_color_cubit.dart';
+import 'package:nike_store_app/bloc/color/fav_color_state.dart';
+import 'package:nike_store_app/bloc/favorite_color_bloc.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,6 +22,8 @@ class HomeShoeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // FavColorBloc favColorBloc = BlocProvider.of<FavColorBloc>(context);
+
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -35,7 +41,7 @@ class HomeShoeCard extends StatelessWidget {
                   child: Container(
                     margin: EdgeInsets.only(top: 12),
                     child: Image.asset(
-                      '${image}',
+                      '$image',
                       width: 150,
                       height: 90,
                       fit: BoxFit.cover,
@@ -46,19 +52,22 @@ class HomeShoeCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      (best_seller == 1) ?
-                      Text(
-                        'BEST SELLER',
-                        style: TextStyle(
-                          color: defaultBlue,
-                          fontSize: 12,
-                          fontWeight: medium,
-                          fontFamily: 'Poppins',
-                        ),
-                      ) : SizedBox(width: 8,),
+                      (best_seller == 1)
+                          ? Text(
+                              'BEST SELLER',
+                              style: TextStyle(
+                                color: defaultBlue,
+                                fontSize: 12,
+                                fontWeight: medium,
+                                fontFamily: 'Poppins',
+                              ),
+                            )
+                          : SizedBox(
+                              width: 8,
+                            ),
                       SizedBox(height: 6),
                       Text(
-                        '${name}',
+                        '$name',
                         style: TextStyle(
                             color: defaultGray,
                             fontSize: 16,
@@ -67,7 +76,7 @@ class HomeShoeCard extends StatelessWidget {
                       ),
                       SizedBox(height: 12),
                       Text(
-                        '${price}',
+                        '$price',
                         style: TextStyle(
                             color: defaultBlack,
                             fontSize: 14,
@@ -81,9 +90,20 @@ class HomeShoeCard extends StatelessWidget {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset('assets/icons/favorite.svg'),
+          BlocBuilder<FavColorCubit, FavColorState>(
+            builder: (context, state) {
+              Color currentColor = state.dcolor;
+              return GestureDetector(
+                onTap: () {
+                  BlocProvider.of<FavColorCubit>(context)
+                      .changeFavColor(currentColor);
+                },
+                child: SvgPicture.asset(
+                  'assets/icons/favorite.svg',
+                  color: currentColor,
+                ),
+              );
+            },
           ),
           Positioned(
             bottom: 0,

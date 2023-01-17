@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:nike_store_app/bloc/favorite_color_bloc.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nike_store_app/widgets/home_shoe_card.dart';
@@ -130,15 +131,27 @@ class _HomePageState extends State<HomePage> {
                         height: 52,
                         child: TextField(
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      semiHighBorderRadius),
-                                  borderSide: BorderSide(color: defaultGray)),
-                              hintText: 'Looking for Shoes',
-                              hintStyle: TextStyle(color: defaultGray),
-                              fillColor: defaultWhite,
-                              focusColor: defaultBlue,
-                              prefixIcon: Icon(Icons.search)),
+                            contentPadding: EdgeInsets.symmetric(vertical: 8),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(
+                                    semiHighBorderRadius),
+                                borderSide: BorderSide(color: defaultGray)),
+                            hintText: 'Looking for Shoes',
+                            hintStyle: TextStyle(
+                              color: defaultGray, 
+                              fontFamily: 'Poppins', 
+                              fontWeight: medium, 
+                              fontSize: 14
+                            ),
+                            fillColor: defaultWhite,
+                            focusColor: defaultBlue,
+                            prefixIcon: Icon(Icons.search)),
+                          style: TextStyle(
+                            color: defaultBlack, 
+                            fontFamily: 'Poppins', 
+                            fontWeight: medium, 
+                            fontSize: 14
+                          ),
                         ),
                       ),
                     ),
@@ -227,18 +240,20 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       child: Row(children: [
                         HomeShoeCard(
-                            name: shoes[0]['name'],
-                            image: shoes[0]['image'],
-                            price: shoes[0]['price'],
-                            best_seller: shoes[0]['best_seller']),
+                          name: shoes[0]['name'],
+                          image: shoes[0]['image'],
+                          price: shoes[0]['price'],
+                          best_seller: shoes[0]['best_seller'],
+                        ),
                         SizedBox(
                           width: 16,
                         ),
                         HomeShoeCard(
-                            name: shoes[1]['name'],
-                            image: shoes[1]['image'],
-                            price: shoes[1]['price'],
-                            best_seller: shoes[1]['best_seller']),
+                          name: shoes[1]['name'],
+                          image: shoes[1]['image'],
+                          price: shoes[1]['price'],
+                          best_seller: shoes[1]['best_seller']
+                        ),
                       ]),
                     )
                   ],
@@ -294,7 +309,7 @@ class _HomePageState extends State<HomePage> {
               } else if (index == 2) {
                 BlocProvider.of<NavigationCubit>(context)
                     .getNavBarItem(NavbarItem.notifications);
-              } else{
+              } else {
                 BlocProvider.of<NavigationCubit>(context)
                     .getNavBarItem(NavbarItem.profile);
               }
