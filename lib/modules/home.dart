@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +6,9 @@ import 'package:nike_store_app/widgets/home_shoe_card.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store_app/widgets/home_subheading.dart';
+import 'package:nike_store_app/bloc/navigation/nav_state.dart';
+import 'package:nike_store_app/bloc/navigation/navbar_items.dart';
+import 'package:nike_store_app/bloc/navigation/nav_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,8 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    int _selectedNavbar = 0;
-
     List<Map<String, dynamic>> shoes = [
       {
         'name': 'Nike Jordan',
@@ -44,17 +46,11 @@ class _HomePageState extends State<HomePage> {
 
     List<String> subheadings = ['Popular Shoes', 'New Arrivals'];
 
-    void _changeSelectedNavBar(int index) {
-      setState(() {
-        _selectedNavbar = index;
-      });
-    }
-
     return Scaffold(
       backgroundColor: darkWhite,
       body: SafeArea(
         child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 26),
+            padding: EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 36),
             child: Column(children: [
               Stack(children: [
                 Container(
@@ -269,30 +265,67 @@ class _HomePageState extends State<HomePage> {
               )
             ])),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorite'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notification'
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile'
-          )
-        ],
-        currentIndex: _selectedNavbar,
-        selectedItemColor: defaultBlue,
-        unselectedItemColor: lightGray,
-        showUnselectedLabels: true,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: defaultBlue,
+        child: SvgPicture.asset('assets/icons/chart.svg', color: defaultWhite),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BlocBuilder<NavigationCubit, NavigationState>(
+        builder: (context, state) {
+          return AnimatedBottomNavigationBar(
+            icons: [
+              Icons.home,
+              Icons.favorite,
+              Icons.notifications,
+              Icons.person
+            ],
+            activeColor: defaultBlue,
+            activeIndex: state.index,
+            gapLocation: GapLocation.center,
+            notchSmoothness: NotchSmoothness.smoothEdge,
+            onTap: (index) {
+              if (index == 0) {
+                BlocProvider.of<NavigationCubit>(context)
+                    .getNavBarItem(NavbarItem.home);
+              } else if (index == 1) {
+                BlocProvider.of<NavigationCubit>(context)
+                    .getNavBarItem(NavbarItem.favorite);
+              } else if (index == 2) {
+                BlocProvider.of<NavigationCubit>(context)
+                    .getNavBarItem(NavbarItem.notifications);
+              } else{
+                BlocProvider.of<NavigationCubit>(context)
+                    .getNavBarItem(NavbarItem.profile);
+              }
+            },
+          );
+        },
+      ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.home),
+      //       label: 'Home'
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.favorite),
+      //       label: 'Favorite'
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.notifications),
+      //       label: 'Notification'
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.person),
+      //       label: 'Profile'
+      //     )
+      //   ],
+      //   currentIndex: _selectedNavbar,
+      //   selectedItemColor: defaultBlue,
+      //   unselectedItemColor: lightGray,
+      //   showUnselectedLabels: true,
+      // ),
     );
   }
 }
