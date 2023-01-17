@@ -82,9 +82,9 @@ class HomePage extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Align(
-                      alignment: Alignment(-0.4, 0),
-                      child: Image.asset('assets/images/highlight_black.png',
-                          width: 18, height: 18)),
+                    alignment: Alignment(-0.4, 0),
+                    child: Image.asset('assets/images/highlight_black.png',
+                        width: 18, height: 18)),
                 )
               ]),
               SizedBox(
@@ -97,17 +97,20 @@ class HomePage extends StatelessWidget {
                     Flexible(
                       flex: 4,
                       fit: FlexFit.loose,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(semiHighBorderRadius),
-                                borderSide: BorderSide(color: defaultGray)),
-                            hintText: 'Looking for Shoes',
-                            hintStyle: TextStyle(color: defaultGray),
-                            fillColor: defaultWhite,
-                            focusColor: defaultBlue,
-                            prefixIcon: Icon(Icons.search)),
+                      child: SizedBox(
+                        height: 52,
+                        child: TextField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(semiHighBorderRadius),
+                                  borderSide: BorderSide(color: defaultGray)),
+                              hintText: 'Looking for Shoes',
+                              hintStyle: TextStyle(color: defaultGray),
+                              fillColor: defaultWhite,
+                              focusColor: defaultBlue,
+                              prefixIcon: Icon(Icons.search)),
+                        ),
                       ),
                     ),
                     Flexible(
@@ -234,55 +237,78 @@ class HomePage extends StatelessWidget {
                               color: defaultWhite,
                               borderRadius: BorderRadius.circular(highBorderRadius)
                             ),
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    child: GestureDetector(
-                                      child: SvgPicture.asset('assets/icons/favorite.svg'),
-                                      onTap: () {},)
+                            child: Stack(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(top: 12),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(top: 12),
+                                        child: Image.asset('assets/images/shoes/nike_jordan_1.png'),
+                                      ),
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'BEST SELLER',
+                                              style: TextStyle(
+                                                color: defaultBlue,
+                                                fontSize: 12,
+                                                fontWeight: medium,
+                                                fontFamily: 'Poppins',
+                                              ),
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              'Nike Jordan',
+                                              style: TextStyle(
+                                                color: defaultGray,
+                                                fontSize: 16,
+                                                fontWeight: semiBold,
+                                                overflow: TextOverflow.fade
+                                              ),
+                                            ),
+                                            SizedBox(height: 12),
+                                            Text(
+                                              '\$302.00',
+                                              style: TextStyle(
+                                                color: defaultBlack,
+                                                fontSize: 14,
+                                                fontWeight: medium,
+                                                fontFamily: 'Poppins',
+                                                overflow: TextOverflow.fade
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Container(
-                                    child: Image.asset('assets/images/shoes/nike_jordan_1.png'),
-                                  ),
-                                  Container(
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          'BEST SELLER',
-                                          style: TextStyle(
-                                            color: defaultBlue,
-                                            fontSize: 12,
-                                            fontWeight: medium,
-                                            fontFamily: 'Poppins',
-                                          ),
-                                        ),
-                                        Text(
-                                          'Nike Jordan',
-                                          style: TextStyle(
-                                            color: defaultGray,
-                                            fontSize: 16,
-                                            fontWeight: semiBold,
-                                            overflow: TextOverflow.fade
-                                          ),
-                                        ),
-                                        Text(
-                                          '\$302.00',
-                                          style: TextStyle(
-                                            color: defaultBlack,
-                                            fontSize: 14,
-                                            fontWeight: medium,
-                                            fontFamily: 'Poppins',
-                                            overflow: TextOverflow.fade
-                                          ),
-                                        ),
-                                      ],
+                                ),
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: SvgPicture.asset('assets/icons/favorite.svg'),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                                      decoration: BoxDecoration(
+                                        color: defaultBlue,
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(semiHighBorderRadius), bottomRight: Radius.circular(semiHighBorderRadius))
+                                      ),
+                                      child: SvgPicture.asset('assets/icons/add.svg'),
                                     ),
-                                  )
-                                ],
-                              ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     )
