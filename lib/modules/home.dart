@@ -1,13 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nike_store_app/models/shoes_catalog_models.dart';
+import 'package:nike_store_app/widgets/home_shoe_card.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nike_store_app/widgets/home_subheading.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
+    int _selectedNavbar = 0;
+
+    List<Map<String, dynamic>> shoes = [
+      {
+        'name': 'Nike Jordan',
+        'image': 'assets/images/shoes/nike_jordan_1.png',
+        'best_seller': 1,
+        'price': '\$302.00',
+      },
+      {
+        'name': 'Nike Air Max',
+        'image': 'assets/images/shoes/nike_air_max_1.png',
+        'best_seller': 1,
+        'price': '\$752.00',
+      },
+    ];
+
     List<String> categories = [
       'All Shoes',
       'Outdoor',
@@ -17,11 +42,19 @@ class HomePage extends StatelessWidget {
       'Fancy'
     ];
 
+    List<String> subheadings = ['Popular Shoes', 'New Arrivals'];
+
+    void _changeSelectedNavBar(int index) {
+      setState(() {
+        _selectedNavbar = index;
+      });
+    }
+
     return Scaffold(
       backgroundColor: darkWhite,
       body: SafeArea(
         child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 10, right: 20, left: 20),
+            padding: EdgeInsets.only(top: 10, right: 20, left: 20, bottom: 26),
             child: Column(children: [
               Stack(children: [
                 Container(
@@ -82,9 +115,9 @@ class HomePage extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   child: Align(
-                    alignment: Alignment(-0.4, 0),
-                    child: Image.asset('assets/images/highlight_black.png',
-                        width: 18, height: 18)),
+                      alignment: Alignment(-0.4, 0),
+                      child: Image.asset('assets/images/highlight_black.png',
+                          width: 18, height: 18)),
                 )
               ]),
               SizedBox(
@@ -102,8 +135,8 @@ class HomePage extends StatelessWidget {
                         child: TextField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(semiHighBorderRadius),
+                                  borderRadius: BorderRadius.circular(
+                                      semiHighBorderRadius),
                                   borderSide: BorderSide(color: defaultGray)),
                               hintText: 'Looking for Shoes',
                               hintStyle: TextStyle(color: defaultGray),
@@ -191,132 +224,74 @@ class HomePage extends StatelessWidget {
               Container(
                 child: Column(
                   children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Flexible(
-                              flex: 4,
-                              fit: FlexFit.tight,
-                              child: Align(
-                                alignment: Alignment(-1, 0),
-                                child: Text(
-                                  'Popular Shoes',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: semiBold,
-                                    color: defaultBlack,
-                                  ),
-                                ),
-                              )),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.loose,
-                              child: Align(
-                                alignment: Alignment(0.8, 0),
-                                child: Text(
-                                  'See All',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: medium,
-                                    color: defaultBlue,
-                                  ),
-                                ),
-                              ))
-                        ],
-                      ),
-                    ),
+                    HomeSubHeading(subheading: subheadings[0]),
                     SizedBox(
                       height: 16,
                     ),
                     Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: defaultWhite,
-                              borderRadius: BorderRadius.circular(highBorderRadius)
-                            ),
-                            child: Stack(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 12),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(top: 12),
-                                        child: Image.asset('assets/images/shoes/nike_jordan_1.png'),
-                                      ),
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'BEST SELLER',
-                                              style: TextStyle(
-                                                color: defaultBlue,
-                                                fontSize: 12,
-                                                fontWeight: medium,
-                                                fontFamily: 'Poppins',
-                                              ),
-                                            ),
-                                            SizedBox(height: 6),
-                                            Text(
-                                              'Nike Jordan',
-                                              style: TextStyle(
-                                                color: defaultGray,
-                                                fontSize: 16,
-                                                fontWeight: semiBold,
-                                                overflow: TextOverflow.fade
-                                              ),
-                                            ),
-                                            SizedBox(height: 12),
-                                            Text(
-                                              '\$302.00',
-                                              style: TextStyle(
-                                                color: defaultBlack,
-                                                fontSize: 14,
-                                                fontWeight: medium,
-                                                fontFamily: 'Poppins',
-                                                overflow: TextOverflow.fade
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: SvgPicture.asset('assets/icons/favorite.svg'),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                                      decoration: BoxDecoration(
-                                        color: defaultBlue,
-                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(semiHighBorderRadius), bottomRight: Radius.circular(semiHighBorderRadius))
-                                      ),
-                                      child: SvgPicture.asset('assets/icons/add.svg'),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: Row(children: [
+                        HomeShoeCard(
+                            name: shoes[0]['name'],
+                            image: shoes[0]['image'],
+                            price: shoes[0]['price'],
+                            best_seller: shoes[0]['best_seller']),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        HomeShoeCard(
+                            name: shoes[1]['name'],
+                            image: shoes[1]['image'],
+                            price: shoes[1]['price'],
+                            best_seller: shoes[1]['best_seller']),
+                      ]),
                     )
                   ],
                 ),
               ),
+              SizedBox(
+                height: 24,
+              ),
               // NEW ARRIVALS
+              Container(
+                child: Column(
+                  children: [
+                    HomeSubHeading(subheading: subheadings[1]),
+                    SizedBox(height: 5),
+                    Container(
+                      width: double.infinity,
+                      child: Image.asset(
+                        'assets/images/new_arrival_poster_1.png',
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  ],
+                ),
+              )
             ])),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorite'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notification'
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile'
+          )
+        ],
+        currentIndex: _selectedNavbar,
+        selectedItemColor: defaultBlue,
+        unselectedItemColor: lightGray,
+        showUnselectedLabels: true,
       ),
     );
   }
