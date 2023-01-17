@@ -222,9 +222,68 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Container(
                       child: Row(
-                        
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: defaultWhite,
+                              borderRadius: BorderRadius.circular(highBorderRadius)
+                            ),
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: GestureDetector(
+                                      child: SvgPicture.asset('assets/icons/favorite.svg'),
+                                      onTap: () {},)
+                                  ),
+                                  Container(
+                                    child: Image.asset('assets/images/shoes/nike_jordan_1.png'),
+                                  ),
+                                  Container(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'BEST SELLER',
+                                          style: TextStyle(
+                                            color: defaultBlue,
+                                            fontSize: 12,
+                                            fontWeight: medium,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                        Text(
+                                          'Nike Jordan',
+                                          style: TextStyle(
+                                            color: defaultGray,
+                                            fontSize: 16,
+                                            fontWeight: semiBold,
+                                            overflow: TextOverflow.fade
+                                          ),
+                                        ),
+                                        Text(
+                                          '\$302.00',
+                                          style: TextStyle(
+                                            color: defaultBlack,
+                                            fontSize: 14,
+                                            fontWeight: medium,
+                                            fontFamily: 'Poppins',
+                                            overflow: TextOverflow.fade
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     )
                   ],

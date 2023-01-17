@@ -33,4 +33,5 @@ const double defaultPadding2x = 32.0;
 const double smallBorderRadius = 8.0;
 const double mediumBorderRadius = 12.0;
 const double semiHighBorderRadius = 14.0;
-const double highBorderRadius = 20.0;
+const double highBorderRadius = 16.0;
+const double veryHighBorderRadius = 20.0;
