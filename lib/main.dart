@@ -5,7 +5,6 @@ import 'package:nike_store_app/bloc/color/fav_color_cubit.dart';
 import 'package:nike_store_app/bloc/navigation/nav_cubit.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:nike_store_app/modules/login.dart';
-import 'modules/home.dart';
 
 void main() {
   runApp(const MyApp());
