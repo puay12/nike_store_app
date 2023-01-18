@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store_app/bloc/color/fav_color_cubit.dart';
 import 'package:nike_store_app/bloc/navigation/nav_cubit.dart';
 import 'package:nike_store_app/constants/theme.dart';
+import 'package:nike_store_app/modules/login.dart';
 import 'modules/home.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
                 duration: 1000,
                 splashTransition: SplashTransition.slideTransition,
                 backgroundColor: defaultBlue,
-                nextScreen: HomePage())),
+                nextScreen: Login())),
       ),
     );
   }

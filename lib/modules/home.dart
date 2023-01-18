@@ -9,14 +9,14 @@ import 'package:nike_store_app/bloc/navigation/nav_state.dart';
 import 'package:nike_store_app/bloc/navigation/navbar_items.dart';
 import 'package:nike_store_app/bloc/navigation/nav_cubit.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> shoes = [
