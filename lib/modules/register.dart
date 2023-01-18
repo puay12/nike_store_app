@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nike_store_app/constants/theme.dart';
-import 'package:nike_store_app/modules/home.dart';
-import 'package:nike_store_app/modules/register.dart';
-import 'package:nike_store_app/widgets/button/back_button.dart';
+import '../widgets/button/back_button.dart';
 import '../widgets/button/blue_text_button.dart';
 import '../widgets/button/custom_icon_button.dart';
-import '../widgets/page_heading.dart';
 import '../widgets/ordinary_text_field.dart';
+import '../widgets/page_heading.dart';
+import 'home.dart';
 
-class Login extends StatefulWidget {
-  Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -35,7 +34,7 @@ class _LoginState extends State<Login> {
               SizedBox(height: 12),
               // Title & subtitle
               PageHeading(
-                  title: 'Hello Again!',
+                  title: 'Register Account',
                   subtitle: 'Fill Your Details or Continue with Social Media'),
               SizedBox(height: 24),
               // Form
@@ -43,12 +42,19 @@ class _LoginState extends State<Login> {
                 child: Column(
                   children: [
                     OrdinaryTextField(
+                      fieldController: nameController,
+                      label: 'Your Name',
+                      hint: 'xxxxx',
+                      inputType: 'text',
+                    ),
+                    SizedBox(height: 12),
+                    OrdinaryTextField(
                       fieldController: emailController,
                       label: 'Email Address',
                       hint: 'xyz@gmail.com',
                       inputType: 'email',
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 12),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -98,54 +104,35 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ]),
-                    SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Align(
-                        alignment: Alignment(1, 0),
-                        child: Text(
-                          'Recovery Password',
-                          style: TextStyle(
-                              color: lightGray,
-                              fontFamily: 'Poppins',
-                              fontSize: 12,
-                              fontWeight: regular),
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 16),
-                    BlueTextButton(nextPage: Home(), labelText: 'Sign In'),
+                    BlueTextButton(nextPage: Home(), labelText: 'Sign Up'),
                     SizedBox(height: 16),
                     CustomIconButton(
-                      nextPage: Home(), 
-                      labelText: 'Sign In With Google', 
-                      iconAsset: 'assets/icons/google.svg', 
-                      buttonColor: darkWhite, 
-                      labelColor: defaultBlack
-                    )
+                        nextPage: Home(),
+                        labelText: 'Sign Up With Google',
+                        iconAsset: 'assets/icons/google.svg',
+                        buttonColor: darkWhite,
+                        labelColor: defaultBlack)
                   ],
                 ),
               ),
               // Create Account
-              SizedBox(height: 72),
+              SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'New User?',
+                    'Already Have Account?',
                     style: TextStyle(
                         color: defaultGray, fontSize: 16, fontWeight: medium),
                   ),
                   SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Register()),
-                      );
+                      Navigator.pop(context);
                     },
                     child: Text(
-                      'Create Account',
+                      'Log In',
                       style: TextStyle(
                           color: defaultBlack,
                           fontSize: 16,

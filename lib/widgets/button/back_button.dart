@@ -10,15 +10,14 @@ class BackButtonCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment(-1,0),
+      alignment: Alignment(-1, 0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.pop(context);
+        },
         child: Container(
           padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: darkWhite,
-            shape: BoxShape.circle
-          ),
+          decoration: BoxDecoration(color: darkWhite, shape: BoxShape.circle),
           child: SvgPicture.asset('assets/icons/back.svg'),
         ),
       ),
