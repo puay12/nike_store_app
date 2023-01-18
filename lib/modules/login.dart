@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nike_store_app/constants/theme.dart';
 import 'package:nike_store_app/modules/home.dart';
 import 'package:nike_store_app/modules/register.dart';
